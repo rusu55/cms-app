@@ -1,15 +1,10 @@
-"use client";
+import prisma from "@/prisma/prisma";
+import { ContractorsBillboard } from "./components/contractors-billboard";
 
-import { Button } from "@/components/ui/button";
-import { useNewAccount } from "./hooks/use-new-account";
-
-const page = () => {
-  const { onOpen } = useNewAccount();
-  return (
-    <div>
-      <Button onClick={onOpen}>Add New Account</Button>
-    </div>
-  );
+const page = async () => {
+  const contractors = await prisma.contractor.findMany({});
+  console.log(contractors);
+  return <ContractorsBillboard />;
 };
 
 export default page;
