@@ -21,3 +21,19 @@ model Contractor {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Video {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+   brideName String 
+   groomName String
+   email String @unique
+   weddingDate DateTime
+   songsOptions String
+   highlightSong String?
+   videoSongs String?
+   details String
+   address String
+   city String
+   state String
+   zipCode String
+}
