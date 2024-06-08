@@ -10,30 +10,23 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash, BookImage } from "lucide-react";
+import { useQuestionnaireModal } from "../hooks/use-questionnaire-modal";
+import { QuestionnaireProps } from "@/types";
 
-interface Props {
-    data:{
-        id: string
-        weddingDate: string
-        brideName: string
-        groomName: string
-        email: string
-        songsOptions: string
-        highlightSong?: string
-        videoSongs? : string
-        details: string
-        address: string
-        city: string
-        state: string
-        zipCode: string
-    }
-}
+export const CellAction= ({data} : {data: QuestionnaireProps}) =>{
 
-export const CellAction: React.FC<Props> = ({data}) =>{
+    const {onOpen, setData, questionnaireData} = useQuestionnaireModal();
+
     const router = useRouter();
    const params = useParams();
+
+   const openModal = (data: QuestionnaireProps) =>{
+    setData(data);
+     onOpen();        
+   }
     return(
         <>
+        
             <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
@@ -46,11 +39,12 @@ export const CellAction: React.FC<Props> = ({data}) =>{
           <DropdownMenuItem onClick={() => router.push(`/video/${data.id}`)}>
             <BookImage className="mr-2 h-4 w-4" /> View and Print Questionnaire
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => {}}>
+          <DropdownMenuItem onClick={()=>openModal(data)}>
             <Trash className="mr-2 h-4 w-4" /> Link Questionnaire
           </DropdownMenuItem>
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu>        
+       
         </>
     )
 }

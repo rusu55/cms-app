@@ -1,5 +1,5 @@
 "use client"
- 
+ import {format} from 'date-fns';
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,8 +27,12 @@ export type Props = {
  
 export const columns: ColumnDef<Props>[] = [
   {
-    accessorKey: "weddingDate",
-    header: "WeddingDate",
+    accessorKey: "weddingDate",    
+    header: () => <div>Wedding Date</div>,
+    cell: ({ row }) => {
+      const  formatedDate= format(row.getValue("weddingDate"), "MM/dd/yyyy");      
+      return <div>{formatedDate}</div>
+    },
   },
   {
     accessorKey: "brideName",
