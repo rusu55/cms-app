@@ -2,6 +2,17 @@
   @tailwind components;
   @tailwind utilities;
 
+  @import "@/node_modules/@syncfusion/ej2-base/styles/material.css";
+  @import "@/node_modules/@syncfusion/ej2-buttons/styles/material.css";
+  @import "@/node_modules/@syncfusion/ej2-calendars/styles/material.css";
+  @import "@/node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
+  @import "@/node_modules/@syncfusion/ej2-inputs/styles/material.css";
+  @import "@/node_modules/@syncfusion/ej2-lists/styles/material.css";
+  @import "@/node_modules/@syncfusion/ej2-navigations/styles/material.css";
+  @import "@/node_modules/@syncfusion/ej2-popups/styles/material.css";
+  @import "@/node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+  @import "@/node_modules/@syncfusion/ej2-react-schedule/styles/material.css";  
+
   @layer base {
     :root {
       --background: 0 0% 100%;
@@ -73,4 +84,31 @@
     body {
       @apply bg-background text-foreground;
     }
+  }
+
+  @media all {
+    .page-break {
+      display: none;
+    }
+  }
+  
+  @media print {
+    html, body {
+      height: initial !important;
+      overflow: initial !important;
+      -webkit-print-color-adjust: exact;
+    }
+  }
+  
+  @media print {
+    .page-break {
+      margin-top: 1rem;
+      display: block;
+      page-break-before: auto;
+    }
+  }
+  
+  @page {
+    size: auto;
+    margin: 20mm;
   }

@@ -1,11 +1,12 @@
 "use client";
 
+import {format} from 'date-fns';
 import { NavButton } from "./nav-button";
 import { usePathname } from "next/navigation";
 
 const routes = [
   {
-    href: "/",
+    href: `/clients/${format(new Date(), 'yyyy')}`,
     label: "Clients",
   },
   {

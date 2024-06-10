@@ -1,8 +1,10 @@
-import React from 'react'
+import { ClientsBillboard } from "../components/clients-bilboard"
 
 const ClientsPage = () => {
   return (
-    <div>ClientsPage</div>
+    <>
+      <ClientsBillboard/>
+    </>
   )
 }
 
