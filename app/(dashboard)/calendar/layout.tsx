@@ -1,6 +1,7 @@
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
+import { currentUser, clerkClient } from "@clerk/nextjs/server";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const layout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
       <Card className=" border-none drop-shadow-sm">
