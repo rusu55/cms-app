@@ -11,14 +11,15 @@ const page = async () => {
     userId,
     provider
   );
-  console.log(response);
+  
 
   const calendarId = process.env.CALENDAR_ID;
+  const apiKey = process.env.GOOGLE_API_KEY
   const accessToken = response.data[0].token;
-
+  
   return (
     <>
-      <GoogleEvent accessToken={accessToken} calendarId={calendarId} />
+      <GoogleEvent accessToken={accessToken} calendarId={calendarId} apiKey={apiKey} />
     </>
   );
 };

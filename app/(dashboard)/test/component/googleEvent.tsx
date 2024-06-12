@@ -1,10 +1,14 @@
 "use client";
-
+import { useEffect, useState } from "react";
 import { gapi } from "gapi-script";
 import { Button } from "@/components/ui/button";
+import {format} from 'date-fns'
 
-export const GoogleEvent = ({ accessToken, calendarId }: any) => {
-  console.log(accessToken);
+export const GoogleEvent = ({ accessToken, calendarId, apiKey }: any) => {
+ 
+  const [events, setEvents] = useState([])
+  
+/*
   var event = {
     summary: "Hello World",
     location: "",
@@ -26,9 +30,32 @@ export const GoogleEvent = ({ accessToken, calendarId }: any) => {
       ],
     },
   };
+*/
+  
+     function initiate() {
+      gapi.client
+          .init({
+              apiKey: apiKey,
+          })
+          .then(function () {
+              return gapi.client.request({
+                  path: `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`,
+              })
+          })
+          .then(
+              (response: any) => {
+                  let events = response.result.items                 
+                 setEvents(events)
+                 return events;
+              },
+              function (err: any) {
+                  return [false, err]
+              }
+          )
+  }    
+  
 
-  const addEvent = () => {
-    console.log(event);
+  const addEvent = () => {    
     function initiate() {
       gapi.client
         .request({
@@ -42,6 +69,7 @@ export const GoogleEvent = ({ accessToken, calendarId }: any) => {
         })
         .then(
           (response: any) => {
+            
             return [true, response];
           },
           function (err: any) {
@@ -53,9 +81,13 @@ export const GoogleEvent = ({ accessToken, calendarId }: any) => {
     gapi.load("client", initiate);
   };
 
+  useEffect(()=>{    
+      gapi.load('client', initiate)    
+  },[])
+  console.log('data:', format(events[0].created, 'MM-dd-yyyy'))
   return (
     <div>
-      <Button onClick={() => addEvent()}>Add Event</Button>
+      <Button onClick={() => addEvent()}>Add Event</Button>      
     </div>
   );
 };

@@ -2,26 +2,28 @@ export let scheduleData: Object[] = [
     {
         Id: 1,
         Subject: 'Explosion of Betelgeuse Star',
-        StartTime: new Date(2019, 0, 1, 9, 30),
-        EndTime: new Date(2019, 0, 1, 11, 0),
-        CategoryColor: '#1aaa55'
+        StartTime: '2024-06-10T15:40:27.000Z',
+        EndTime: '2024-06-10T10:30:00-05:00',
+        CategoryColor: '#1aaa55',
+        Description: 'Test Body'
+        
     }, {
         Id: 2,
         Subject: 'Thule Air Crash Report',
-        StartTime: new Date(2019, 0, 2, 12, 0),
-        EndTime: new Date(2019, 0, 2, 14, 0),
+        StartTime: new Date(2024, 0, 2, 12, 0),
+        EndTime: new Date(2024, 0, 2, 14, 0),
         CategoryColor: '#357cd2'
     }, {
         Id: 3,
         Subject: 'Blue Moon Eclipse',
-        StartTime: new Date(2019, 0, 3, 9, 30),
-        EndTime: new Date(2019, 0, 3, 11, 0),
+        StartTime: new Date(2024, 0, 3, 9, 30),
+        EndTime: new Date(2024, 0, 3, 11, 0),
         CategoryColor: '#7fa900'
     }, {
         Id: 4,
         Subject: 'Meteor Showers in 2018',
-        StartTime: new Date(2019, 0, 1, 13, 0),
-        EndTime: new Date(2019, 0, 1, 14, 30),
+        StartTime: new Date(2024, 0, 1, 13, 0),
+        EndTime: new Date(2024, 0, 1, 14, 30),
         CategoryColor: '#ea7a57'
     }, {
         Id: 5,
