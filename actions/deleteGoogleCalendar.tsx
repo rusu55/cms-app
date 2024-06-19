@@ -1,19 +1,16 @@
 "use client";
 import { gapi } from "gapi-script";
-export const addGoogleCalendar = (
+export const deleteGoogleCalendar = (
   accessToken: string,
   calendarId: string,
-  apiKey: string,
-  event: Object,
-  setId: any
+  eventId: string
 ) => {
   let data: any;
   const initiate = async () => {
     gapi.client
       .request({
-        path: `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`,
-        method: "POST",
-        body: event,
+        path: `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events/${eventId}`,
+        method: "DELETE",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -21,7 +18,8 @@ export const addGoogleCalendar = (
       })
       .then(
         (response: any) => {
-          setId(response.result.id);
+          //console.log(response);
+          //setId(response.result.id);
           return [true, response];
         },
         function (err: any) {
