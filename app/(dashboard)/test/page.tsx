@@ -1,21 +1,22 @@
-import React from "react";
-import { GoogleEvent } from "./component/googleEvent";
-
 import { currentUser, clerkClient } from "@clerk/nextjs/server";
-const page = async () => {
-  const user = await currentUser();
+import { GoogleEvent } from "./component/googleEvent";
+import { gapi } from "gapi-script";
 
+const PageCalendar = async () => {
+  const user = await currentUser();
   const userId: any = user?.id;
   const provider = "oauth_google";
-  const response = await clerkClient.users.getUserOauthAccessToken(
-    userId,
-    provider
-  );
+  console.log(user)
+  
+  const response = await clerkClient.users.getUserOauthAccessToken(userId, provider)
   
 
   const calendarId = process.env.CALENDAR_ID;
   const apiKey = process.env.GOOGLE_API_KEY
   const accessToken = response.data[0].token;
+
+  // query google calendar
+  
   
   return (
     <>
@@ -24,4 +25,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default PageCalendar;
