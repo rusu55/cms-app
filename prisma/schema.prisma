@@ -13,6 +13,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Client {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  brideName String
+  groomName String
+  email String @unique
+  secondaryEmail String?
+  phone String?
+  weddingDate DateTime
+  services String[]
+  packagePrice String  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  videoQuestionnaire Video?
+}
+
 model Contractor {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
@@ -36,4 +51,7 @@ model Video {
    city String
    state String
    zipCode String
+   clientId String @db.ObjectId @unique
+
+   client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
 }
