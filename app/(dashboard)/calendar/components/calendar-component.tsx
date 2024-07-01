@@ -39,6 +39,7 @@ export const CalendarComponent = ({
   }, []);
 
   const onActionComplete = (args: any): void => {
+    
     if (
       args.requestType === "eventCreated" ||
       args.requestType === "eventChanged" ||
@@ -55,7 +56,7 @@ export const CalendarComponent = ({
         StartTimezone,
         Subject,
       } = args.data[0];
-
+      console.log(args)
       const event: any = {
         summary: Subject,
         status: "confirmed",
@@ -70,8 +71,9 @@ export const CalendarComponent = ({
         },
         description: Description,
       };
-      if (args.changedRecords.lenght > 0) {
+      if(args.requestType === "eventChanged") {        
         const eventId = Id;
+        
         updateGoogleCalendar(
           accessToken,
           calendarId,
@@ -80,15 +82,19 @@ export const CalendarComponent = ({
           eventId,
           setId
         );
-        return;
+        
       }
-      if (args.deletedRecords.length > 0) {
+      if( args.requestType === "eventRemoved") {
+        
         const eventId = Id;
         deleteGoogleCalendar(accessToken, calendarId, eventId);
         return;
       }
 
-      addGoogleCalendar(accessToken, calendarId, apiKey, event, setId);
+      if(args.requestType === "eventCreated"){
+        addGoogleCalendar(accessToken, calendarId, apiKey, event, setId);
+      }
+      console.log('end')
     }
   };
   //console.log(id);
