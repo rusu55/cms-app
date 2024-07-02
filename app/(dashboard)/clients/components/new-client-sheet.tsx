@@ -1,3 +1,7 @@
+"use client";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import axios from "axios";
 import {
   Sheet,
   SheetContent,
@@ -10,10 +14,15 @@ import { useNewClient } from "../hooks/use-new-client";
 import { ClientForm } from "./client-form";
 
 export const NewClientSheet = () => {
+  const [loading, isLoading] = useState<boolean>(false);
   const { isOpen, onClose } = useNewClient();
+  const { toast } = useToast();
 
   const onSubmit = (values: any) => {
+    isLoading(true);
     console.log(values);
+    toast({ title: "Success", description: "Added" });
+    //axios.post("/api/clients", values).then((response) => {});
   };
 
   return (

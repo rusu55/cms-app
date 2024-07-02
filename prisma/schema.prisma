@@ -14,44 +14,44 @@ datasource db {
 }
 
 model Client {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  brideName String
-  groomName String
-  email String @unique
-  secondaryEmail String?
-  phone String?
-  weddingDate DateTime
-  services String[]
-  packagePrice String  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  brideName          String
+  groomName          String
+  email              String   @unique
+  secondaryEmail     String?
+  phone              String?
+  weddingDate        DateTime
+  services           String[]
+  packagePrice       String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
   videoQuestionnaire Video?
 }
 
 model Contractor {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  email String? @unique
-  phone String?
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String?  @unique
+  phone     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Video {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-   brideName String 
-   groomName String
-   email String @unique
-   weddingDate DateTime
-   songsOptions String
-   highlightSong String?
-   videoSongs String?
-   details String
-   address String
-   city String
-   state String
-   zipCode String
-   clientId String @db.ObjectId @unique
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  brideName     String
+  groomName     String
+  email         String   @unique
+  weddingDate   DateTime
+  songsOptions  String
+  highlightSong String?
+  videoSongs    String?
+  details       String
+  address       String
+  city          String
+  state         String
+  zipCode       String
+  clientId      String   @unique @db.ObjectId
 
-   client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
 }
