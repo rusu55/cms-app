@@ -2,8 +2,6 @@
 import dynamic from "next/dynamic";
 
 import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
-import axios from "axios";
 import {
   Sheet,
   SheetContent,
@@ -13,39 +11,27 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useNewClient } from "../hooks/use-new-client";
+import { useCreateClient } from "../hooks/use-create-client";
 
 const ClientForm = dynamic(
-  () => import('@/app/(dashboard)/clients/components/client-form'),
+  () => import("@/app/(dashboard)/clients/components/client-form"),
   {
-    ssr: false,    
+    ssr: false,
   }
 );
-
 
 export const NewClientSheet = () => {
   const [loading, isLoading] = useState<boolean>(false);
   const { isOpen, onClose } = useNewClient();
-  const { toast } = useToast();
-  
+  const mutation = useCreateClient();
 
-  
   const onSubmit = async (values: any) => {
-    isLoading(true);    
-    console.log(values);
-    axios.post("/api/clients", values)
-        .then((response)=>{
-            console.log(response)
-            toast({title: 'Success', description: "New Client was addedd!"})
-            onClose()
-         })
-        .catch((error)=>(
-          toast({title: "Error Ocurred", description: "Client was not added!"})
-        ))
-        .finally(()=>{
-          isLoading(false)
-        })
-    //toast({ title: "Success", description: "Added" });
-    //axios.post("/api/clients", values).then((response) => {});
+    isLoading(true);
+    mutation.mutate(values, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
   };
 
   return (
@@ -55,7 +41,7 @@ export const NewClientSheet = () => {
           <SheetTitle>New Account</SheetTitle>
           <SheetDescription>Create ne Account...</SheetDescription>
         </SheetHeader>
-        <ClientForm onSubmit={onSubmit} disabled={false} />
+        <ClientForm onSubmit={onSubmit} disabled={mutation.isPending} />
       </SheetContent>
     </Sheet>
   );

@@ -6,6 +6,7 @@ import { ModalProvider } from "@/providers/modal-provider";
 import { Toaster } from "@/components/ui/toaster";
 
 import "./globals.css";
+import { QueryProvider } from "@/providers/query-client-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,11 +24,12 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-        
-          <SheetProvider />
-          <ModalProvider /> 
-          <Toaster />         
-            {children}  
+          <QueryProvider>
+            <SheetProvider />
+            <ModalProvider />
+            <Toaster />
+            {children}
+          </QueryProvider>
         </body>
       </html>
     </ClerkProvider>

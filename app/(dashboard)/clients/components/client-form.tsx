@@ -30,7 +30,6 @@ import { cn } from "@/lib/utils";
 
 import { services } from "@/utils/constants";
 
-
 const formSchema = z.object({
   brideName: z.string().min(2).max(50),
   groomName: z.string().min(2).max(50),
@@ -52,21 +51,14 @@ type Props = {
   onSubmit: (values: FormValues) => void;
   disabled?: boolean;
 };
- const ClientForm = ({
-  id,
-  onSubmit,
-  disabled,
-  defaultValues,
-}: Props) => {
+const ClientForm = ({ id, onSubmit, disabled, defaultValues }: Props) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      services: [],
-    },
+    defaultValues: {},
   });
 
   const handleSubmit = (values: FormValues) => {
-   onSubmit(values);   
+    onSubmit(values);
   };
 
   return (
@@ -269,4 +261,4 @@ type Props = {
     </Form>
   );
 };
-export default ClientForm
+export default ClientForm;

@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import {z} from 'zod'
 
 import prisma from "@/prisma/prisma";
+
+export const GET = async () => {
+    const response = await prisma.client.findMany({})
+    return NextResponse.json(response, {status: 201})
+}
 
 export const POST = async (request: NextRequest) =>{
     const body = await request.json();
