@@ -30,6 +30,7 @@ import { cn } from "@/lib/utils";
 
 import { services } from "@/utils/constants";
 
+
 const formSchema = z.object({
   brideName: z.string().min(2).max(50),
   groomName: z.string().min(2).max(50),
@@ -51,7 +52,7 @@ type Props = {
   onSubmit: (values: FormValues) => void;
   disabled?: boolean;
 };
-export const ClientForm = ({
+ const ClientForm = ({
   id,
   onSubmit,
   disabled,
@@ -65,7 +66,7 @@ export const ClientForm = ({
   });
 
   const handleSubmit = (values: FormValues) => {
-    onSubmit(values);
+   onSubmit(values);   
   };
 
   return (
@@ -268,3 +269,4 @@ export const ClientForm = ({
     </Form>
   );
 };
+export default ClientForm

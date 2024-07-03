@@ -1,4 +1,6 @@
 "use client";
+import dynamic from "next/dynamic";
+
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
@@ -11,17 +13,38 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useNewClient } from "../hooks/use-new-client";
-import { ClientForm } from "./client-form";
+
+const ClientForm = dynamic(
+  () => import('@/app/(dashboard)/clients/components/client-form'),
+  {
+    ssr: false,    
+  }
+);
+
 
 export const NewClientSheet = () => {
   const [loading, isLoading] = useState<boolean>(false);
   const { isOpen, onClose } = useNewClient();
   const { toast } = useToast();
+  
 
-  const onSubmit = (values: any) => {
-    isLoading(true);
+  
+  const onSubmit = async (values: any) => {
+    isLoading(true);    
     console.log(values);
-    toast({ title: "Success", description: "Added" });
+    axios.post("/api/clients", values)
+        .then((response)=>{
+            console.log(response)
+            toast({title: 'Success', description: "New Client was addedd!"})
+            onClose()
+         })
+        .catch((error)=>(
+          toast({title: "Error Ocurred", description: "Client was not added!"})
+        ))
+        .finally(()=>{
+          isLoading(false)
+        })
+    //toast({ title: "Success", description: "Added" });
     //axios.post("/api/clients", values).then((response) => {});
   };
 
