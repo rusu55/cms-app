@@ -30,7 +30,7 @@ export const NewClientSheet = () => {
     mutation.mutate(values, {
       onSuccess: () => {
         onClose();
-      },
+      },      
     });
   };
 
@@ -41,7 +41,7 @@ export const NewClientSheet = () => {
           <SheetTitle>New Account</SheetTitle>
           <SheetDescription>Create ne Account...</SheetDescription>
         </SheetHeader>
-        <ClientForm onSubmit={onSubmit} disabled={mutation.isPending} />
+        <ClientForm onSubmit={onSubmit} disabled={mutation.isPending}  />
       </SheetContent>
     </Sheet>
   );

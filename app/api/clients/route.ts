@@ -26,12 +26,34 @@ export const POST = async (request: NextRequest) =>{
     })
     
     const response = schema.safeParse(body);
-
+    
     if (!response.success) {
         const { errors } = response.error;
 
         return NextResponse.json(errors, {status: 401})
     }
 
-    return NextResponse.json(body , {status:201})
+    const existingClient = await prisma.client.findFirst({
+        where: {
+            email: response.data.email
+        }
+    });
+
+    if(existingClient){
+        return NextResponse.json('User with this email already registerd!', {status: 401})
+    }
+
+    const newClient = await prisma.client.create({
+        data:{
+            brideName: response.data.brideName,
+            groomName: response.data.groomName,
+            email: response.data.email,
+            secondaryEmail: response.data?.secondaryEmail,
+            phone: response.data?.phone,
+            weddingDate: response.data.weddingDate,
+            services: response.data.services,
+            packagePrice: response.data.packagePrice
+        }
+    })
+    return NextResponse.json(newClient, {status:201})
 }

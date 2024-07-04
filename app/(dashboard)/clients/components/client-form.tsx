@@ -51,10 +51,10 @@ type Props = {
   onSubmit: (values: FormValues) => void;
   disabled?: boolean;
 };
-const ClientForm = ({ id, onSubmit, disabled, defaultValues }: Props) => {
+const ClientForm = ({ id, onSubmit, disabled }: Props) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {},
+    defaultValues: {services: []},
   });
 
   const handleSubmit = (values: FormValues) => {

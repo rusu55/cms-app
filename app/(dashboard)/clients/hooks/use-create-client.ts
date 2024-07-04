@@ -19,9 +19,10 @@ export const useCreateClient = () =>{
             toast({title: 'Merge', description: 'sadcsdfbdskfb'})
             queryClient.invalidateQueries({queryKey: ["clients"]});
         },
-        onError: () =>{
-
+        onError: (error: any) =>{           
+            toast({title: 'Error', description: error.response.data})
         }
     })
+    
     return mutation
 }
