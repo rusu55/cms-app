@@ -12,7 +12,7 @@ import { Copy, Edit, MoreHorizontal, Trash, BookImage } from "lucide-react";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { useDeleteClient } from "../hooks/use-delete-clients";
 type Props = {
-  id: string;
+  id: string 
   groomName: string;
   brideName: string;
   weddingDate: string;
@@ -20,14 +20,13 @@ type Props = {
 type CellActionProps = {
   data: Props;
 };
-export const CellAction: React.FC<CellActionProps> = ({ data }) => {
+export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const mutation = useDeleteClient();
 
   const onConfirm = async () => {
-    console.log("ssssssssssssss");
-    //mutation.mutate(data.id)
+    mutation.mutate(id)
     setOpen(false);
     //setLoading(false);
   };

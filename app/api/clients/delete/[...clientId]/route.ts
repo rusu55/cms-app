@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from '@/prisma/prisma';
 
-export const DELETE =  async (request: NextRequest, {params}:{params: {id: string}}) =>{
+export const DELETE =  async (request: NextRequest, {params}:{params: {clientId: string}}) =>{
     try{
         const response = await prisma.client.delete({
             where:{
-                id: params.id.toString()
+                id: params.clientId.toString()
             }
         })
         if (!response){

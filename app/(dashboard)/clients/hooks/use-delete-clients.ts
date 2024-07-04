@@ -7,8 +7,8 @@ export const useDeleteClient = () =>{
     const queryClient = useQueryClient()
 
     const mutation = useMutation({
-        mutationFn: async (id) =>{
-            const response = await axios.delete(`/api/clients/${id}`)
+        mutationFn: async (id: string) =>{
+            const response = await axios.delete(`/api/clients/delete/${id}`)
             if(response.status != 201){
                 throw new Error("Failed to delete Client!")
              }
