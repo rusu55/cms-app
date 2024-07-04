@@ -10,7 +10,12 @@ export const GET = async(request:NextRequest, {params}: {params: {year: string}}
                     gte: new Date(params.year + "-01-01").toISOString(),
                     lte: new Date(params.year + "-12-31").toISOString(),
                 }
-            }
+            },
+            orderBy: [
+                {
+                    weddingDate: 'asc'
+                }
+            ]
         })
 
         if(!result){
