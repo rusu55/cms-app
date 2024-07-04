@@ -55,5 +55,12 @@ export const POST = async (request: NextRequest) =>{
             packagePrice: response.data.packagePrice
         }
     })
+
+    const newProject = await prisma.project.create({
+        data: {
+            clientId: newClient.id
+        }
+    })
+    
     return NextResponse.json(newClient, {status:201})
 }

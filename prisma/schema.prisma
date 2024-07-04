@@ -26,6 +26,8 @@ model Client {
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
   videoQuestionnaire Video?
+  project Project? 
+  
 }
 
 model Contractor {
@@ -52,6 +54,22 @@ model Video {
   state         String
   zipCode       String
   clientId      String   @unique @db.ObjectId
-
   client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+model Project {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  backup Boolean?
+  backupDate DateTime?
+  photoEdit Boolean?
+  photoEditDueDate DateTime?
+  photoEditDoneDate DateTime?
+  photoEditBy String?
+  videoEdit Boolean?
+  videoEditDueDate DateTime?
+  videoEditDoneDate DateTime?
+  videoEditBy String?
+  photoBooth Boolean?
+  clientId  String @unique @db.ObjectId
+  client   Client  @relation(fields: [clientId], references: [id], onDelete: Cascade) 
 }

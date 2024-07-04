@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash, BookImage } from "lucide-react";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { useDeleteClient } from "../hooks/use-delete-clients";
+import { Separator } from "@/components/ui/separator";
 type Props = {
   id: string 
   groomName: string;
@@ -49,7 +50,24 @@ export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Delete
+            <Trash className="mr-2 h-4 w-4" /> Edit Client
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
+            <Trash className="mr-2 h-4 w-4" /> Delete Client
+          </DropdownMenuItem>
+          <Separator className="my-1" />
+          <DropdownMenuLabel>Project Updates</DropdownMenuLabel>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
+            <Trash className="mr-2 h-4 w-4" /> Project Backed Up
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
+            <Trash className="mr-2 h-4 w-4" /> Project Culled
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
+            <Trash className="mr-2 h-4 w-4" /> Pictured Edited
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
+            <Trash className="mr-2 h-4 w-4" /> Video Edited
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
