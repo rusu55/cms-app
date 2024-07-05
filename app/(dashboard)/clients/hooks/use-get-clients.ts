@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import prisma from "@/prisma/prisma";
 import axios from "axios";
 
 export const useGetClients = (year: string) => {

@@ -10,6 +10,10 @@ const routes = [
     label: "Clients",
   },
   {
+    href: `/projects/${format(new Date(), 'yyyy')}`,
+    label: "Projects",
+  },
+  {
     href: "/contractors",
     label: "Contractors",
   },

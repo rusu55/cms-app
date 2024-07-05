@@ -59,6 +59,7 @@ model Video {
 
 model Project {
   id String @id @default(auto()) @map("_id") @db.ObjectId
+  projectDate DateTime
   backup Boolean?
   backupDate DateTime?
   photoEdit Boolean?
