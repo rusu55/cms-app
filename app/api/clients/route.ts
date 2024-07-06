@@ -58,7 +58,8 @@ export const POST = async (request: NextRequest) =>{
 
     const newProject = await prisma.project.create({
         data: {
-            clientId: newClient.id
+            clientId: newClient.id,
+            projectDate: response.data.weddingDate,
         }
     })
     

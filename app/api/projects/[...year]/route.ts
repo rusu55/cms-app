@@ -8,8 +8,11 @@ export const GET = async(request:NextRequest, {params}: {params: {year: string}}
             where: {
                 projectDate: {
                     gte: new Date(params.year + "-01-01").toISOString(),
-                    lte: new Date(params.year + "-12-31").toISOString(),
+                    lte: new Date().toLocaleDateString(),
                 }
+            },
+            include: {
+              client: true
             },
             orderBy: [
                 {
