@@ -10,7 +10,7 @@ export const GET = async(request:NextRequest, {params}: {params: {year: string}}
             where: {
                 projectDate: {
                     gte: new Date(params.year + "-01-01").toISOString(),
-                    lte: new Date(`${params.year}-${date.getMonth()}- ${date.getDay()}`).toISOString()
+                    lte: new Date(`${params.year}-${date.getMonth()}-${date.getDay()}`).toISOString()
                 }
             },
             include: {
@@ -29,6 +29,6 @@ export const GET = async(request:NextRequest, {params}: {params: {year: string}}
         return NextResponse.json(result, {status: 201})
     }
     catch(error){
-        return NextResponse.json("Internal Erroor", {status: 500})
+        return NextResponse.json("Internal Error", {status: 500})
     }
 }
