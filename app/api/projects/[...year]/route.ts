@@ -4,13 +4,14 @@ import { format } from 'date-fns';
 
 
 export const GET = async(request:NextRequest, {params}: {params: {year: string}}) =>{
-    const date = new Date()
+   
+    const date = new Date();       
     try{
         const result = await prisma.project.findMany({
             where: {
                 projectDate: {
                     gte: new Date(params.year + "-01-01").toISOString(),
-                    lte: new Date(`${params.year}-${date.getMonth()}-${date.getDay()}`).toISOString()
+                    lte: new Date(`${params.year}-${date.getDate()}-${date.getMonth()}`).toISOString()
                 }
             },
             include: {

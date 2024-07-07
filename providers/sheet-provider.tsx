@@ -1,7 +1,7 @@
 "use client";
 
 import { useMountedState } from "react-use";
-import { NewAccountSheet } from "@/app/(dashboard)/contractors/components/new-account-sheet";
+import { NewContractorSheet } from "@/app/(dashboard)/contractors/components/new-contractor-sheet";
 import { NewClientSheet } from "@/app/(dashboard)/clients/components/new-client-sheet";
 
 export const SheetProvider = () => {
@@ -10,7 +10,7 @@ export const SheetProvider = () => {
   if (!isMounted) return null;
   return (
     <>
-      <NewAccountSheet />
+      <NewContractorSheet />
       <NewClientSheet />
     </>
   );

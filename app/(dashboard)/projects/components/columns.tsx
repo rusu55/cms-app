@@ -1,8 +1,8 @@
 "use client";
-import { format } from "date-fns";
+import { format, parse, addDays } from "date-fns";
 import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
-
+import { StatusAction } from "./status-action";
 export type Props = {
   id: string;
   projectDate: string;
@@ -14,7 +14,7 @@ export const columns: ColumnDef<Props>[] = [
     accessorKey: "projectDate",
     header: "Wedding Date",
     cell: ({ row }) => {
-      return format(row.getValue("projectDate"), "PPP");
+      return format(row.getValue("projectDate"), 'MM/dd/yyyy');
     },
   },
   {
@@ -22,12 +22,54 @@ export const columns: ColumnDef<Props>[] = [
     header: "Bride Name",
   },
   {
-    accessorKey: "backup",
-    header: "Back Up",
+    accessorKey: "status",
+    header: "Project Status",
+    cell: ({row}) =>{
+      return(
+        <div className="flex items-start">
+          <div className="p-1 rounded-lg bg-red-200 text-center">
+            <span>{row.getValue("status")}</span>
+          </div>
+          <div>
+            <StatusAction data={row.original} />
+          </div>
+        </div>
+      )    
+     },
+     
+     
   },
   {
     accessorKey: "projectStatus",
-    header: "Project Status",
+    header: "Photo Due Date",
+    cell: ({row}) =>{     
+      const dueDate = format(addDays(new Date(row.getValue('projectDate')), 60), 'MM/dd/yyyy')
+      return(
+        <div>
+          <span>{dueDate}</span>
+        </div>
+      )
+    }
+  },
+  {
+    accessorKey: "projectStatus",
+    header: "Video Due Date",
+    cell: ({row}) =>{     
+      const dueDate = format(addDays(new Date(row.getValue('projectDate')), 90), 'MM/dd/yyyy')
+      return(
+        <div>
+          <span>{dueDate}</span>
+        </div>
+      )
+    }
+  },
+  {
+    accessorKey: "projectStatus",
+    header: "Photo Edited By",
+  },
+  {
+    accessorKey: "projectStatus",
+    header: "Video Edited By",
   },
   {
     id: "actions",

@@ -20,7 +20,7 @@ type Props = {
 type CellActionProps = {
   data: Props;
 };
-export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
+export const StatusAction: React.FC<CellActionProps> = ({ data: {id} }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   
@@ -47,9 +47,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Edit Project
-          </DropdownMenuItem>          
           <Separator className="my-1" />
           <DropdownMenuLabel>Project Updates</DropdownMenuLabel>
           <DropdownMenuItem onClick={() => setOpen(true)}>

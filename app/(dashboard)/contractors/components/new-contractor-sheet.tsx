@@ -7,11 +7,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import { useNewAccount } from "../hooks/use-new-account";
+import { useNewContractor } from "../hooks/use-new-contractor";
 import { ContractorForm } from "./contractor-form";
 
-export const NewAccountSheet = () => {
-  const { isOpen, onClose } = useNewAccount();
+export const NewContractorSheet = () => {
+  const { isOpen, onClose } = useNewContractor();
 
   const onSubmit = (values: any) => {
     console.log({ values });

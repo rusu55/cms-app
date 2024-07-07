@@ -10,12 +10,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash, BookImage } from "lucide-react";
 import { AlertModal } from "@/components/modals/alert-modal";
+
 import { Separator } from "@/components/ui/separator";
 type Props = {
-  id: string;
-  projectDate: string;
+  id: string 
+  groomName: string;
   brideName: string;
-  backup: boolean;
+  weddingDate: string;
 };
 type CellActionProps = {
   data: Props;
@@ -24,8 +25,8 @@ export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   
-
-  const onConfirm = async () => {    
+  const onConfirm = async () => {
+   
     setOpen(false);
     
   };
@@ -48,21 +49,24 @@ export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Edit Project
-          </DropdownMenuItem>          
+            <Trash className="mr-2 h-4 w-4" /> Edit Client
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
+            <Trash className="mr-2 h-4 w-4" /> Delete Client
+          </DropdownMenuItem>
           <Separator className="my-1" />
           <DropdownMenuLabel>Project Updates</DropdownMenuLabel>
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Set ast Backup
+            <Trash className="mr-2 h-4 w-4" /> Project Backed Up
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Set as Culled
+            <Trash className="mr-2 h-4 w-4" /> Project Culled
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Set Photo as Edited
+            <Trash className="mr-2 h-4 w-4" /> Pictured Edited
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Set Video as Edited
+            <Trash className="mr-2 h-4 w-4" /> Video Edited
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

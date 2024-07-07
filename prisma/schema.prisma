@@ -37,6 +37,8 @@ model Contractor {
   phone     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  projectId String   @unique @db.ObjectId  
+  projectEdit Project @relation(fields: [projectId], references: [id], onDelete: Cascade)  
 }
 
 model Video {
@@ -60,17 +62,23 @@ model Video {
 model Project {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   projectDate DateTime
-  backup Boolean?
-  backupDate DateTime?
+  status Status @default(Shoot)   
   photoEdit Boolean?
   photoEditDueDate DateTime?
   photoEditDoneDate DateTime?
-  photoEditBy String?
+  EditBy Contractor[]
   videoEdit Boolean?
   videoEditDueDate DateTime?
-  videoEditDoneDate DateTime?
-  videoEditBy String?
+  videoEditDoneDate DateTime?  
   photoBooth Boolean?
   clientId  String @unique @db.ObjectId
   client   Client  @relation(fields: [clientId], references: [id], onDelete: Cascade) 
+}
+
+enum Status {
+  Shoot
+  Backup
+  Culled
+  Edited
+  Delivered
 }
