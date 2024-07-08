@@ -1,3 +1,5 @@
+"use client";
+import dynamic from "next/dynamic";
 import {
   Sheet,
   SheetContent,
@@ -8,13 +10,20 @@ import {
 } from "@/components/ui/sheet";
 
 import { useNewContractor } from "../hooks/use-new-contractor";
+import { useCreateContractor } from "../hooks/use-create-contractor";
 import { ContractorForm } from "./contractor-form";
 
 export const NewContractorSheet = () => {
   const { isOpen, onClose } = useNewContractor();
+  const mutation = useCreateContractor();
 
-  const onSubmit = (values: any) => {
+  const onSubmit = async (values: any) => {
     console.log({ values });
+    mutation.mutate(values, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
   };
 
   return (
@@ -24,11 +33,7 @@ export const NewContractorSheet = () => {
           <SheetTitle>New Account</SheetTitle>
           <SheetDescription>Create ne Account...</SheetDescription>
         </SheetHeader>
-        <ContractorForm
-          onSubmit={onSubmit}
-          disabled={false}
-          defaultValues={{ name: "" }}
-        />
+        <ContractorForm onSubmit={onSubmit} disabled={false} />
       </SheetContent>
     </Sheet>
   );

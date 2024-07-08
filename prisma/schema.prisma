@@ -26,19 +26,19 @@ model Client {
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
   videoQuestionnaire Video?
-  project Project? 
-  
+  project            Project?
 }
 
 model Contractor {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  email     String?  @unique
-  phone     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  projectId String   @unique @db.ObjectId  
-  projectEdit Project @relation(fields: [projectId], references: [id], onDelete: Cascade)  
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  email       String?  @unique
+  phone       String?
+  role        String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  projectId   String?  @unique @db.ObjectId
+  projectEdit Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
 model Video {
@@ -56,23 +56,23 @@ model Video {
   state         String
   zipCode       String
   clientId      String   @unique @db.ObjectId
-  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  client        Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
 }
 
 model Project {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  projectDate DateTime
-  status Status @default(Shoot)   
-  photoEdit Boolean?
-  photoEditDueDate DateTime?
+  id                String       @id @default(auto()) @map("_id") @db.ObjectId
+  projectDate       DateTime
+  status            Status       @default(Shoot)
+  photoEdit         Boolean?
+  photoEditDueDate  DateTime?
   photoEditDoneDate DateTime?
-  EditBy Contractor[]
-  videoEdit Boolean?
-  videoEditDueDate DateTime?
-  videoEditDoneDate DateTime?  
-  photoBooth Boolean?
-  clientId  String @unique @db.ObjectId
-  client   Client  @relation(fields: [clientId], references: [id], onDelete: Cascade) 
+  EditBy            Contractor[]
+  videoEdit         Boolean?
+  videoEditDueDate  DateTime?
+  videoEditDoneDate DateTime?
+  photoBooth        Boolean?
+  clientId          String       @unique @db.ObjectId
+  client            Client       @relation(fields: [clientId], references: [id], onDelete: Cascade)
 }
 
 enum Status {

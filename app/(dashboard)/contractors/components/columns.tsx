@@ -11,27 +11,20 @@ export type Props = {
 };
 export const columns: ColumnDef<Props>[] = [
   {
-    accessorKey: "weddingDate",
-    header: "Wedding Date",
-    cell: ({ row }) => {
-      return format(row.getValue("weddingDate"), "PPP");
-    },
-  },
-  {
-    accessorKey: "brideName",
-    header: "Bride",
-  },
-  {
-    accessorKey: "groomName",
-    header: "Groom",
+    accessorKey: "name",
+    header: "Contractor Name",
   },
   {
     accessorKey: "email",
     header: "Email",
   },
   {
-    accessorKey: "projectStatus",
-    header: "Project Status",
+    accessorKey: "phone",
+    header: "Phone",
+  },
+  {
+    accessorKey: "role",
+    header: "Roles",
   },
   {
     id: "actions",

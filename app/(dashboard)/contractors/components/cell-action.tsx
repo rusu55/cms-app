@@ -13,7 +13,7 @@ import { AlertModal } from "@/components/modals/alert-modal";
 
 import { Separator } from "@/components/ui/separator";
 type Props = {
-  id: string 
+  id: string;
   groomName: string;
   brideName: string;
   weddingDate: string;
@@ -21,14 +21,15 @@ type Props = {
 type CellActionProps = {
   data: Props;
 };
-export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
+export const CellAction: React.FC<CellActionProps> = ({ data: { id } }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  
+  const [type, setType] = useState("");
+
   const onConfirm = async () => {
-   
+    if (type === "viewJobs") console.log("Jobsssssssssssssssssssss");
     setOpen(false);
-    
+    setType("");
   };
 
   return (
@@ -49,24 +50,19 @@ export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Edit Client
+            <Trash className="mr-2 h-4 w-4" /> Edit Contractor
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Delete Client
+            <Trash className="mr-2 h-4 w-4" /> Delete Contractor
           </DropdownMenuItem>
           <Separator className="my-1" />
-          <DropdownMenuLabel>Project Updates</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Project Backed Up
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Project Culled
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Pictured Edited
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Video Edited
+          <DropdownMenuItem
+            onClick={() => {
+              setOpen(true);
+              setType("viewJobs");
+            }}
+          >
+            <Trash className="mr-2 h-4 w-4" /> View Jobs
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

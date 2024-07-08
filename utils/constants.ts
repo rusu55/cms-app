@@ -6,3 +6,8 @@ export const services = [{id: 'Photography', label: 'Photography'},
                          {id: 'Drone', label: 'Drone'},
                          {id: 'Wedding Album', label: 'Wedding Album'},
                          {id: 'Parents Album', label: 'Parents Album'} ]
+export const roles = [
+    {id: 'Photographer', label: 'Photographer'},
+    {id: 'Videographer', label: 'Videographer'},
+    {id: 'Editor', label: 'Editor'},
+]
