@@ -1,8 +1,10 @@
 "use client";
 import { format, parse, addDays } from "date-fns";
 import { ColumnDef } from "@tanstack/react-table";
+import { EditingAction } from "./editing-action";
 import { CellAction } from "./cell-action";
 import { StatusAction } from "./status-action";
+import { cn } from "@/lib/utils";
 export type Props = {
   id: string;
   projectDate: string;
@@ -64,12 +66,34 @@ export const columns: ColumnDef<Props>[] = [
     }
   },
   {
-    accessorKey: "projectStatus",
+    accessorKey: "editBy",
     header: "Photo Edited By",
+    
+    cell: ({row}) =>{
+      
+      return(
+        <div className="flex justify-between items-start">
+          <div>
+             {row.getValue('editBy') !== null ? (<span>Not Assigned</span>) : (<span>{row.getValue('editBy')}</span>)}
+          </div>
+          <div>
+            <EditingAction data={row.original} />
+          </div>
+        </div>
+       
+        
+      )
+    } 
+    
   },
   {
-    accessorKey: "projectStatus",
+    accessorKey: "editBy",
     header: "Video Edited By",
+    cell: ({row}) =>{
+      return(
+        row.getValue('editBy') !== null ? (<span>Not Assigned</span>) : (<span>{row.getValue('editBy')}</span>)        
+      )
+    }
   },
   {
     id: "actions",

@@ -37,7 +37,7 @@ model Contractor {
   role        String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  projectId   String?  @unique @db.ObjectId
+  projectId   String?  @db.ObjectId
   projectEdit Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
