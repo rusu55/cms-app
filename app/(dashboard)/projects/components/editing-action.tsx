@@ -13,6 +13,7 @@ import { Copy, Edit, MoreHorizontal, Trash, BookImage } from "lucide-react";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { Separator } from "@/components/ui/separator";
 import { useGetContractors } from "../../contractors/hooks/use-get-contractors";
+import { useSetEditProject } from "../hooks/use-setEdit-project";
 
 type Props = {
   id: string;
@@ -23,24 +24,31 @@ type Props = {
 type CellActionProps = {
   data: Props;
 };
-export const EditingAction: React.FC<CellActionProps> = ({ data: {id} }) => {
+export const EditingAction: React.FC<CellActionProps> = ({ data: { id } }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  let contractors = []
+  const [info, setInfo] = useState({});
+  let contractors = [];
 
   const contractorsQuerry = useGetContractors();
+  const mutation = useSetEditProject();
 
-  if(contractorsQuerry.data){
-     contractors = contractorsQuerry.data.filter((value: any) => value.role[value.role.length-1] === 'Editor')        
+  if (contractorsQuerry.data) {
+    contractors = contractorsQuerry.data.filter(
+      (value: any) => value.role[value.role.length - 1] === "Editor"
+    );
   }
-   console.log(contractors)
-   
-  
-  
 
-  const onConfirm = async () => {    
-    setOpen(false);
-    
+  const onConfirm = async () => {
+    mutation.mutate(
+      { id, info },
+      {
+        onSuccess: () => {
+          console.log(id);
+          setOpen(false);
+        },
+      }
+    );
   };
 
   return (
@@ -59,14 +67,19 @@ export const EditingAction: React.FC<CellActionProps> = ({ data: {id} }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Asign Job</DropdownMenuLabel>          
+          <DropdownMenuLabel>Asign Job</DropdownMenuLabel>
           <Separator className="my-1" />
-          {contractors.map((contractor: any, index: number) => 
-              <DropdownMenuItem key={index} onClick={() => setOpen(true)}>
-                <Trash className="mr-2 h-4 w-4" /> {contractor.name}
-              </DropdownMenuItem>
-          )}          
-          
+          {contractors.map((contractor: any, index: number) => (
+            <DropdownMenuItem
+              key={index}
+              onClick={() => {
+                setOpen(true);
+                setInfo({ action: "PhotoEdit", contractorId: contractor.id });
+              }}
+            >
+              <Trash className="mr-2 h-4 w-4" /> {contractor.name}
+            </DropdownMenuItem>
+          ))}
         </DropdownMenuContent>
       </DropdownMenu>
     </>

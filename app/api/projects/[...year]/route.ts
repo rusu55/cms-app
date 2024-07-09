@@ -33,3 +33,4 @@ export const GET = async(request:NextRequest, {params}: {params: {year: string}}
         return NextResponse.json("Internal Error", {status: 500})
     }
 }
+
