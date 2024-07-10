@@ -13,14 +13,13 @@ import { AlertModal } from "@/components/modals/alert-modal";
 import { Separator } from "@/components/ui/separator";
 type Props = {
   id: string;
-  projectDate: string;
-  brideName: string;
+  projectDate: string;  
   backup: boolean;
 };
 type CellActionProps = {
   data: Props;
 };
-export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
+export const CellAction: React.FC<any> = ({ data: {id} }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   

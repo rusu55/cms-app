@@ -50,24 +50,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Edit Client
+            <Edit className="mr-2 h-4 w-4" />View & Edit
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4" /> Delete Client
-          </DropdownMenuItem>
-          <Separator className="my-1" />
-          <DropdownMenuLabel>Project Updates</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Project Backed Up
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Project Culled
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Pictured Edited
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Video Edited
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

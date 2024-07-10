@@ -2,12 +2,14 @@
 import { format } from "date-fns";
 import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
+import { ServiceBadge } from "./serviceBadge";
 
 export type Props = {
   id: string;
   groomName: string;
   brideName: string;
   weddingDate: string;
+  services: any;
 };
 export const columns: ColumnDef<Props>[] = [
   {
@@ -30,8 +32,18 @@ export const columns: ColumnDef<Props>[] = [
     header: "Email",
   },
   {
-    accessorKey: "projectStatus",
-    header: "Project Status",
+    accessorKey: "services",
+    header: "Wedding Package",
+    cell: ({row}) => {
+      console.log(row.original.services)
+      return (
+        <div>
+          {row.original.services.map((service: string, index: number)=>(
+            <ServiceBadge key={index} service={service} icon=''/>
+          ))}
+        </div>
+      )    
+    },
   },
   {
     id: "actions",

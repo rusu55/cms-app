@@ -14,13 +14,13 @@ import { Separator } from "@/components/ui/separator";
 type Props = {
   id: string;
   projectDate: string;
-  brideName: string;
+  
   backup: boolean;
 };
 type CellActionProps = {
   data: Props;
 };
-export const StatusAction: React.FC<CellActionProps> = ({ data: {id} }) => {
+export const StatusAction: React.FC<any> = ({ data: {id} }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   

@@ -7,11 +7,10 @@ import { StatusAction } from "./status-action";
 import { cn } from "@/lib/utils";
 export type Props = {
   id: string;
-  projectDate: string;
-  brideName: string;
+  projectDate: string; 
   backup: boolean;
 };
-export const columns: ColumnDef<Props>[] = [
+export const columns: ColumnDef<any>[] = [
   {
     accessorKey: "projectDate",
     header: "Wedding Date",
@@ -42,7 +41,7 @@ export const columns: ColumnDef<Props>[] = [
      
   },
   {
-    accessorKey: "projectStatus",
+    accessorKey: "photoDueDate",
     header: "Photo Due Date",
     cell: ({row}) =>{     
       const dueDate = format(addDays(new Date(row.getValue('projectDate')), 60), 'MM/dd/yyyy')
@@ -54,7 +53,7 @@ export const columns: ColumnDef<Props>[] = [
     }
   },
   {
-    accessorKey: "projectStatus",
+    accessorKey: "videoDueDate",
     header: "Video Due Date",
     cell: ({row}) =>{     
       const dueDate = format(addDays(new Date(row.getValue('projectDate')), 90), 'MM/dd/yyyy')
@@ -66,7 +65,7 @@ export const columns: ColumnDef<Props>[] = [
     }
   },
   {
-    accessorKey: "editBy",
+    accessorKey: "photoEditBy",
     header: "Photo Edited By",
     
     cell: ({row}) =>{
@@ -74,7 +73,7 @@ export const columns: ColumnDef<Props>[] = [
       return(
         <div className="flex justify-between items-start">
           <div>
-             {row.getValue('editBy') !== null ? (<span>Not Assigned</span>) : (<span>{row.getValue('editBy')}</span>)}
+             {row.original.photoEdit?.name ? (<span>{row.original.photoEdit.name}</span>) : (<span>Not Assigned</span>)}
           </div>
           <div>
             <EditingAction data={row.original} />
@@ -87,11 +86,11 @@ export const columns: ColumnDef<Props>[] = [
     
   },
   {
-    accessorKey: "editBy",
+    accessorKey: "videoEditBy",
     header: "Video Edited By",
     cell: ({row}) =>{
       return(
-        row.getValue('editBy') !== null ? (<span>Not Assigned</span>) : (<span>{row.getValue('editBy')}</span>)        
+        row.getValue('videoEditBy') !== null ? (<span>Not Assigned</span>) : (<span>{row.getValue('videoEditBy')}</span>)        
       )
     }
   },

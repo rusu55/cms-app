@@ -17,7 +17,7 @@ export const useCreateContractor = () => {
     },
     onSuccess: () => {
       toast({ title: "Success", description: "New Contractor added!" });
-      queryClient.invalidateQueries({ queryKey: ["clients"] });
+      queryClient.invalidateQueries({ queryKey: ["contractors"] });
     },
     onError: (error: any) => {
       toast({ title: "Error", description: error.response.data });

@@ -27,6 +27,32 @@ model Client {
   updatedAt          DateTime @updatedAt
   videoQuestionnaire Video?
   project            Project?
+  wedding            Wedding?
+  engagement         Engagement?
+}
+
+model Wedding {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  clientId          String      @unique @db.ObjectId
+  client Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  mainPhotoId        String?  @unique @db.ObjectId
+  mainPhoto          Contractor? @relation("MainPhoto", fields: [mainPhotoId], references: [id])
+  secondPhotoId      String?  @unique @db.ObjectId
+  secondPhoto         Contractor? @relation("SecondPhoto", fields: [secondPhotoId], references: [id])
+  mainVideoId         String?  @unique @db.ObjectId
+  mainVideo           Contractor? @relation("MainVideo", fields: [mainVideoId], references: [id])
+  secondVideoId        String?  @unique @db.ObjectId
+  secondVideo         Contractor? @relation("SecondVideo", fields: [secondVideoId], references: [id])
+  photoboothId         String?  @unique @db.ObjectId
+  photobooth           Contractor? @relation("PhotoBooth", fields: [photoboothId], references: [id])
+}
+
+model Engagement {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  clientId          String      @unique @db.ObjectId
+  client Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  engagementId       String?  @unique @db.ObjectId
+  engagementBy       Contractor? @relation("Engagement", fields: [engagementId], references: [id], onDelete: Cascade)
 }
 
 model Project {
@@ -34,14 +60,16 @@ model Project {
   projectDate       DateTime
   status            Status      @default(Shoot)
   photoEditDueDate  DateTime?
-  photoEditDoneDate DateTime?
-  photoEditBy       Contractor? @relation("PhotoEdit")
-  videoEditBy       Contractor? @relation("VideoEdit")
+  photoEditDoneDate DateTime?  
   videoEditDueDate  DateTime?
   videoEditDoneDate DateTime?
   photoBooth        Boolean?
   clientId          String      @unique @db.ObjectId
   client            Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  photoEditId           String?  @unique @db.ObjectId
+  photoEdit         Contractor? @relation("PhotoEdit", fields: [photoEditId], references: [id], onDelete: Cascade)
+  videoEditId          String?  @unique @db.ObjectId
+  videoEdit         Contractor? @relation("VideoEdit", fields: [videoEditId], references: [id], onDelete: Cascade)
 }
 
 model Contractor {
@@ -52,10 +80,14 @@ model Contractor {
   role      String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  photoId   String?  @unique @db.ObjectId
-  photoEdit Project? @relation("PhotoEdit", fields: [photoId], references: [id], onDelete: Cascade)
-  videoId   String?  @unique @db.ObjectId
-  videoEdit Project? @relation("VideoEdit", fields: [photoId], references: [id], onDelete: Cascade)
+  photoEditBy Project? @relation("PhotoEdit")
+  videoEditBy Project? @relation("VideoEdit")
+  mainPhotoBy Wedding? @relation("MainPhoto")
+  secondPhotoBy Wedding? @relation("SecondPhoto")
+  mainVideoBy Wedding?  @relation("MainVideo")
+  secondVideoBy Wedding?  @relation("SecondVideo")
+  photoboothBy Wedding?  @relation("PhotoBooth")
+  engagementBy Engagement? @relation("Engagement")
 }
 
 model Video {

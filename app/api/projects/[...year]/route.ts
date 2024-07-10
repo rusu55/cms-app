@@ -15,8 +15,11 @@ export const GET = async(request:NextRequest, {params}: {params: {year: string}}
                 }
             },
             include: {
-              client: true
+              client: true,
+              photoEdit: true,
+              videoEdit: true,
             },
+           
             orderBy: [
                 {
                     projectDate: 'asc'

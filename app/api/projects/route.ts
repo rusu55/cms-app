@@ -5,12 +5,11 @@ export const PATCH = async (request:NextRequest) => {
     const {id, action, contractorId} = await request.json()
    try{
     
-    const response = await prisma.contractor.update({
-        where:{ id: contractorId},
+    const response = await prisma.project.update({
+        where:{ id: id},
         data:
-            (action === 'PhotoEdit' ? { photoId: id} : {videoId: id})              
+            (action === 'PhotoEdit' ? { photoEditId : contractorId} : {videoEditId: contractorId})              
     })
-    
     
     return NextResponse.json('Updated', {status:201})
    }catch(error)

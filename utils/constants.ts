@@ -4,6 +4,7 @@ export const services = [{id: 'Photography', label: 'Photography'},
                          {id: 'Second Cinematographer', label: 'Second Cinematographer'},
                          {id: 'Engagement', label: 'Engagement'},
                          {id: 'Drone', label: 'Drone'},
+                         {id: 'Photobooth', label: 'Photobooth'},
                          {id: 'Wedding Album', label: 'Wedding Album'},
                          {id: 'Parents Album', label: 'Parents Album'} ]
 export const roles = [

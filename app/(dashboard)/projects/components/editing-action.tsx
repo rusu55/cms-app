@@ -17,14 +17,13 @@ import { useSetEditProject } from "../hooks/use-setEdit-project";
 
 type Props = {
   id: string;
-  projectDate: string;
-  brideName: string;
+  projectDate: string;  
   backup: boolean;
 };
 type CellActionProps = {
   data: Props;
 };
-export const EditingAction: React.FC<CellActionProps> = ({ data: { id } }) => {
+export const EditingAction: React.FC<any> = ({ data: { id } }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({});
@@ -44,7 +43,6 @@ export const EditingAction: React.FC<CellActionProps> = ({ data: { id } }) => {
       { id, info },
       {
         onSuccess: () => {
-          console.log(id);
           setOpen(false);
         },
       }

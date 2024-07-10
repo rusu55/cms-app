@@ -10,16 +10,20 @@ const routes = [
     label: "Clients",
   },
   {
+    href: `/weddings/${format(new Date(), 'yyyy')}`,
+    label: "Weddings",
+  },
+  {
+    href: `/engagements/${format(new Date(), 'yyyy')}`,
+    label: "Engagements",
+  },
+  {
     href: `/projects/${format(new Date(), 'yyyy')}`,
     label: "Projects",
   },
   {
     href: "/contractors",
     label: "Contractors",
-  },
-  {
-    href: "/",
-    label: "Contracts",
   },
   {
     href: "/calendar",
