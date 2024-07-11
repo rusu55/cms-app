@@ -81,6 +81,7 @@ export const POST = async (request: NextRequest) =>{
             data:{
                 clientId: newClient.id,
                 engagementId: null,
+                engagementDate: null,
             }
         })
     }

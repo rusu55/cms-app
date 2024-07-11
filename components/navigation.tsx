@@ -1,24 +1,24 @@
 "use client";
 
-import {format} from 'date-fns';
+import { format } from "date-fns";
 import { NavButton } from "./nav-button";
 import { usePathname } from "next/navigation";
 
 const routes = [
   {
-    href: `/clients/${format(new Date(), 'yyyy')}`,
+    href: `/clients/${format(new Date(), "yyyy")}`,
     label: "Clients",
   },
   {
-    href: `/weddings/${format(new Date(), 'yyyy')}`,
+    href: `/weddings/${format(new Date(), "yyyy")}`,
     label: "Weddings",
   },
   {
-    href: `/engagements/${format(new Date(), 'yyyy')}`,
+    href: `/engagements?search=scheduled`,
     label: "Engagements",
   },
   {
-    href: `/projects/${format(new Date(), 'yyyy')}`,
+    href: `/projects/${format(new Date(), "yyyy")}`,
     label: "Projects",
   },
   {

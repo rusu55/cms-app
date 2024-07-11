@@ -3,6 +3,7 @@ import prisma from "@/prisma/prisma";
 
 
 export const GET = async(request:NextRequest, {params}: {params: {year: string}}) =>{
+    //console.log(params)
     try{
         const result = await prisma.engagement.findMany({
             where: {
