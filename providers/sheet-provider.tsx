@@ -3,6 +3,7 @@
 import { useMountedState } from "react-use";
 import { NewContractorSheet } from "@/app/(dashboard)/contractors/components/new-contractor-sheet";
 import { NewClientSheet } from "@/app/(dashboard)/clients/components/new-client-sheet";
+import { EditEngagementSheet } from "@/app/(dashboard)/engagements/components/edit-engagement-sheet";
 
 export const SheetProvider = () => {
   const isMounted = useMountedState();
@@ -12,6 +13,7 @@ export const SheetProvider = () => {
     <>
       <NewContractorSheet />
       <NewClientSheet />
+      <EditEngagementSheet />
     </>
   );
 };

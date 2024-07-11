@@ -14,7 +14,7 @@ const routes = [
     label: "Weddings",
   },
   {
-    href: `/engagements?search=scheduled`,
+    href: `/engagements/scheduled`,
     label: "Engagements",
   },
   {

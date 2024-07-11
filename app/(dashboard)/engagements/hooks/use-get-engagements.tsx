@@ -1,12 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery,  useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 export const useGetEngagements = ({ params }: any) => {
-  console.log(params);
+ console.log('s-a')
   const queryString =
     params.slug.length > 1
       ? `?key=${params["slug"][0]}&year=${params["slug"][1]}`
       : `?key=${params["slug"][0]}`;
+
+console.log(params.slug)
+const queryClient = useQueryClient()
+queryClient.invalidateQueries({
+  queryKey: ["engagements"],
+  refetchType: 'all'
+})
 
   const query = useQuery({
     queryKey: ["engagements"],
@@ -19,6 +26,7 @@ export const useGetEngagements = ({ params }: any) => {
       const { data } = response;
       return data;
     },
+    
   });
 
   return query;
