@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash, BookImage } from "lucide-react";
 import { AlertModal } from "@/components/modals/alert-modal";
-import { useEngagementSheet } from "../hooks/use-engagement-sheet";
+import { useSheetHook } from "@/hooks/use-sheet-hook";
 import { Separator } from "@/components/ui/separator";
 type Props = {
   id: string 
@@ -24,7 +24,7 @@ type CellActionProps = {
 export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { onOpen } = useEngagementSheet();
+  const { onOpen } = useSheetHook();
  // const mutation = useDeleteClient();
 
   const onConfirm = async () => {

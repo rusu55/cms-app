@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { useGetClients } from "../hooks/use-get-clients";
-import { useNewClient } from "../hooks/use-new-client";
+import { useSheetHook } from "@/hooks/use-sheet-hook";
 import { DataTable } from "@/components/data-table";
 import {columns} from '../components/columns';
 import { Skeleton } from "@/components/ui/skeleton";
@@ -11,7 +11,7 @@ import { Loader2 } from "lucide-react";
 //import prisma from "@/prisma/prisma";
 
 const ClientsPage =  ({ params }: { params: { year: string } }) => {
-  const { onOpen } = useNewClient();
+  const { onOpen } = useSheetHook();
   const clientsQuerry = useGetClients(params.year); 
   const clients = clientsQuerry.data || []
   
