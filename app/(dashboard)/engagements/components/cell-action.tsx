@@ -10,25 +10,24 @@ import {
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash, BookImage } from "lucide-react";
 import { AlertModal } from "@/components/modals/alert-modal";
-import { useSheetHook } from "@/hooks/use-sheet-hook";
-import { Separator } from "@/components/ui/separator";
+import { useSheetHook } from "../hooks/use-sheet-hook";
+
 type Props = {
-  id: string 
+  id: string;
   groomName: string;
   brideName: string;
-  
 };
 type CellActionProps = {
   data: Props;
 };
-export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
+export const CellAction: React.FC<CellActionProps> = ({ data: { id } }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const { onOpen } = useSheetHook();
- // const mutation = useDeleteClient();
+  // const mutation = useDeleteClient();
 
   const onConfirm = async () => {
-   // mutation.mutate(id)
+    // mutation.mutate(id)
     setOpen(false);
     //setLoading(false);
   };
@@ -51,7 +50,8 @@ export const CellAction: React.FC<CellActionProps> = ({ data: {id} }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem onClick={onOpen}>
-            <Edit className="mr-2 h-4 w-4" />Edit Engagement Details
+            <Edit className="mr-2 h-4 w-4" />
+            Edit Engagement Details
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4" /> Delete Client

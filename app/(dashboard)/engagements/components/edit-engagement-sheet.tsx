@@ -10,11 +10,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useSheetHook } from "@/hooks/use-sheet-hook";
+import { useSheetHook } from "../hooks/use-sheet-hook";
 //import { useCreateClient } from "../hooks/use-create-client";
 
-const ClientForm = dynamic(
-  () => import("@/app/(dashboard)/clients/components/client-form"),
+const EngagementForm = dynamic(
+  () => import("@/app/(dashboard)/engagements/components/engagement-form"),
   {
     ssr: false,
   }
@@ -27,21 +27,21 @@ export const EditEngagementSheet = () => {
 
   const onSubmit = async (values: any) => {
     isLoading(true);
-  //  mutation.mutate(values, {
+    //  mutation.mutate(values, {
     //  onSuccess: () => {
     //    onClose();
-   //   },      
-   // });
+    //   },
+    // });
   };
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent className="space-y-4">
         <SheetHeader>
-          <SheetTitle>New Account</SheetTitle>
-          <SheetDescription>Create ne Account...</SheetDescription>
+          <SheetTitle>Engagement </SheetTitle>
+          <SheetDescription>Edit Engagement...</SheetDescription>
         </SheetHeader>
-        <ClientForm onSubmit={onSubmit} disabled={false}  />
+        <EngagementForm onSubmit={onSubmit} disabled={false} />
       </SheetContent>
     </Sheet>
   );

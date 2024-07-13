@@ -8,8 +8,6 @@ import { columns } from "./components/columns";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Loader2 } from "lucide-react";
 
-//import prisma from "@/prisma/prisma";
-
 const ClientsPage = () => {
   const { onOpen } = useNewContractor();
   const contractorsQuerry = useGetContractors();

@@ -251,6 +251,7 @@ const ClientForm = ({ id, onSubmit, disabled }: Props) => {
             </FormItem>
           )}
         />
+
         <Button className="w-full" disabled={disabled}>
           {id ? "Save Changes" : "Add New Client"}
         </Button>
