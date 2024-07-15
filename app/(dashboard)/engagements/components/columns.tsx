@@ -29,7 +29,7 @@ export const columns: ColumnDef<Props>[] = [
   
   {
     id: "actions",
-    cell: ({ row }) => <CellAction data={row.original} />,
+    cell: ({ row }) => <CellAction id={row.original.id} />,
     header: "Actions",
   },
 

@@ -10,9 +10,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useSheetHook } from "../hooks/use-sheet-hook";
-//import { useCreateClient } from "../hooks/use-create-client";
-
+import { useOpenEditEngagement } from "../hooks/use-open-edit-engagement";
+import { useGetEngagement } from "../hooks/use-get-engagement";
+ 
 const EngagementForm = dynamic(
   () => import("@/app/(dashboard)/engagements/components/engagement-form"),
   {
@@ -22,8 +22,8 @@ const EngagementForm = dynamic(
 
 export const EditEngagementSheet = () => {
   const [loading, isLoading] = useState<boolean>(false);
-  const { isOpen, onClose } = useSheetHook();
-  //const mutation = useCreateClient();
+  const { isOpen, onClose, id } = useOpenEditEngagement();
+  const engagementDetails = useGetEngagement(id)
 
   const onSubmit = async (values: any) => {
     isLoading(true);

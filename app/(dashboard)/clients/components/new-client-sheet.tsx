@@ -10,7 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useSheetHook } from "@/hooks/use-sheet-hook";
+import { useOpenNewClient } from "../hooks/use-open-new-client";
 import { useCreateClient } from "../hooks/use-create-client";
 
 const ClientForm = dynamic(
@@ -22,7 +22,7 @@ const ClientForm = dynamic(
 
 export const NewClientSheet = () => {
   const [loading, isLoading] = useState<boolean>(false);
-  const { isOpen, onClose } = useSheetHook();
+  const { isOpen, onClose } = useOpenNewClient();
   const mutation = useCreateClient();
 
   const onSubmit = async (values: any) => {

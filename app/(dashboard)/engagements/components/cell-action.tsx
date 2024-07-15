@@ -10,20 +10,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash, BookImage } from "lucide-react";
 import { AlertModal } from "@/components/modals/alert-modal";
-import { useSheetHook } from "../hooks/use-sheet-hook";
+import { useOpenEditEngagement } from "../hooks/use-open-edit-engagement";
 
 type Props = {
   id: string;
-  groomName: string;
-  brideName: string;
+ // groomName: string;
+ // brideName: string;
 };
-type CellActionProps = {
-  data: Props;
-};
-export const CellAction: React.FC<CellActionProps> = ({ data: { id } }) => {
+//type CellActionProps = {
+ // data: Props;
+//};
+export const CellAction = ( {id} : Props ) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { onOpen } = useSheetHook();
+  const { onOpen } = useOpenEditEngagement();
   // const mutation = useDeleteClient();
 
   const onConfirm = async () => {
@@ -31,7 +31,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data: { id } }) => {
     setOpen(false);
     //setLoading(false);
   };
-
+  console.log(id)
   return (
     <>
       <AlertModal
@@ -49,7 +49,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data: { id } }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={onOpen}>
+          <DropdownMenuItem onClick={() => onOpen(id)}>
             <Edit className="mr-2 h-4 w-4" />
             Edit Engagement Details
           </DropdownMenuItem>

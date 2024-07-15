@@ -6,7 +6,7 @@ type Props ={
     onClose: () => void;
 }
 
-export const useSheetHook = create<Props>((set)=>({
+export const useOpenNewClient= create<Props>((set)=>({
     isOpen: false,
     onOpen: () => set({isOpen: true}),
     onClose: () => set({isOpen: false})
