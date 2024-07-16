@@ -5,8 +5,7 @@ import prisma from "@/prisma/prisma";
 export const GET = async(request:NextRequest) =>{
     const url = new URL(request.url)
     const searchParams = new URLSearchParams(url.searchParams)
-    console.log('s-a cerut Refresh data!!!')
-    console.log(searchParams)
+   
     searchParams.has('year') ? console.log('are year search') : console.log('nu are')
     try{
         const result = await prisma.engagement.findMany({

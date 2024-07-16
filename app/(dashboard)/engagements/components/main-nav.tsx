@@ -24,8 +24,9 @@ export const MainNav = ({
           key={index}
           href={navLink.href}
           className={cn(
-            "text-sm font-medium transition-colors hover:text-primary",
-            pathName === navLink.href && "text-red-800"
+            "text-sm font-medium transition-colors hover:text-red-800",
+            pathName === navLink.href &&
+              "text-red-800 p-2 rounded-lg bg-muted-foreground/20"
           )}
         >
           {navLink.label}

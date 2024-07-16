@@ -12,8 +12,6 @@ import { MainNav } from "../components/main-nav";
 //import prisma from "@/prisma/prisma";
 
 const EngagementsPage = ({ params }: { params: { slug: string } }) => {
-  // const { onOpen } = useNewClient();
-
   const engagementsQuerry = useGetEngagements({ params });
   const engagements = engagementsQuerry.data || [];
 
