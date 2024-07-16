@@ -2,13 +2,11 @@ import { useQuery,  useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 export const useGetEngagements = ({ params }: any) => {
- console.log('s-a')
   const queryString =
     params.slug.length > 1
       ? `?key=${params["slug"][0]}&year=${params["slug"][1]}`
       : `?key=${params["slug"][0]}`;
 
-console.log(params.slug)
 const queryClient = useQueryClient()
 queryClient.invalidateQueries({
   queryKey: ["engagements"],

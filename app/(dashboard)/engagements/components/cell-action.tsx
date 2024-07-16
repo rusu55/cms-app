@@ -31,7 +31,7 @@ export const CellAction = ( {id} : Props ) => {
     setOpen(false);
     //setLoading(false);
   };
-  console.log(id)
+  
   return (
     <>
       <AlertModal

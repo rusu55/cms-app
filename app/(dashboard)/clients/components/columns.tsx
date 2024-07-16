@@ -35,7 +35,7 @@ export const columns: ColumnDef<Props>[] = [
     accessorKey: "services",
     header: "Wedding Package",
     cell: ({row}) => {
-      console.log(row.original.services)
+      
       return (
         <div>
           {row.original.services.map((service: string, index: number)=>(

@@ -11,7 +11,7 @@ export const useGetClients = (year: string) => {
             }
            const {data} = response
             return data
-           //console.log(response)
+           
         }
     });
 
