@@ -20,7 +20,8 @@ model Client {
   email              String      @unique
   secondaryEmail     String?
   phone              String?
-  weddingDate        DateTime
+  weddingDate        DateTime?
+  weddingLocation    String?
   services           String[]
   packagePrice       String
   createdAt          DateTime    @default(now())
@@ -51,6 +52,8 @@ model Wedding {
 model Engagement {
   id                String      @id @default(auto()) @map("_id") @db.ObjectId
   engagementDate    DateTime?
+  engagementLocation String?
+  engagementDetails String?
   engagementCreated DateTime    @default(now())
   clientId          String      @unique @db.ObjectId
   client            Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)

@@ -31,11 +31,15 @@ export const EditEngagementSheet = () => {
   };
 
   const defaultValues = engagementQuery.data
-    ? {
-        name: engagementQuery.data.name,
+    ? {        
+        engagementLocation: engagementQuery.data.engagementLocation,
+        engagementDetails: engagementQuery.data.engagementDetails,
+        engagementDate: engagementQuery.data.engagementDate,
       }
     : {
-        name: "",
+      engagementLocation: "",
+      engagementDetails: "",
+      engagementDate: "",
       };
 
   return (
@@ -50,7 +54,7 @@ export const EditEngagementSheet = () => {
             <Loader2 className=" size-6 text-muted-foreground animate-spin" />
           </div>
         ) : (
-          <EngagementForm onSubmit={onSubmit} disabled={false} />
+          <EngagementForm onSubmit={onSubmit} disabled={false} defaultValues={defaultValues} id={id} />
         )}
       </SheetContent>
     </Sheet>

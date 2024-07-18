@@ -3,19 +3,25 @@ import prisma from "@/prisma/prisma";
 
 export const GET = async (req: NextRequest, {params}: {params: {id: string}}) =>{
 
-    try{
-        if(!params.id){
-            return NextResponse.json('ID missing', {status: 401})
-        }
+    try{      
 
         const response = await prisma.engagement.findFirst({
             where:{
-                id
+                id: params.id.toString()
+            },
+            include:{
+                client: true
             }
         })
+        if(!response){
+            return NextResponse.json('Engagement not found', {status: 401})
+        }
+
+        return NextResponse.json(response, {status: 201})
+
     }catch(error){
         return NextResponse.json(error, {status: 500})
     }
 
-    return NextResponse.json(response, {status: 201})
+    
 }

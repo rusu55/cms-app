@@ -22,7 +22,7 @@ const formSchema = z.object({
   name: z.string().min(2).max(50),
   email: z.string().email(),
   phone: z.string().optional(),
-  roles: z.array(z.string()).refine((value) => value.some((item) => item), {
+  role: z.array(z.string()).refine((value) => value.some((item) => item), {
     message: "You have to select at least one item.",
   }),
 });
@@ -37,10 +37,10 @@ type Props = {
   disabled?: boolean;
 };
 
-export const ContractorForm = ({ id, onSubmit, onDelete, disabled }: Props) => {
+export const ContractorForm = ({ id, onSubmit, onDelete, disabled, defaultValues }: Props) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: { roles: [] },
+    defaultValues: defaultValues,
   });
 
   const handleSubmit = (values: FormValues) => {
@@ -102,39 +102,39 @@ export const ContractorForm = ({ id, onSubmit, onDelete, disabled }: Props) => {
         />
         <FormField
           control={form.control}
-          name="roles"
+          name="role"
           render={() => (
             <FormItem className="mt-3">
               <div className="mb-4">
                 <FormLabel className="text-base">Services</FormLabel>
               </div>
-              {roles.map((role) => (
+              {roles.map((rol) => (
                 <FormField
-                  key={role.id}
+                  key={rol.id}
                   control={form.control}
-                  name="roles"
+                  name="role"
                   render={({ field }) => {
                     return (
                       <FormItem
-                        key={role.id}
+                        key={rol.id}
                         className="flex flex-row items-start space-x-3 space-y-0"
                       >
                         <FormControl>
                           <Checkbox
-                            checked={field.value?.includes(role.id)}
+                            checked={field.value?.includes(rol.id)}
                             onCheckedChange={(checked) => {
                               return checked
-                                ? field.onChange([...field.value, role.id])
+                                ? field.onChange([...field.value, rol.id])
                                 : field.onChange(
                                     field.value?.filter(
-                                      (value) => value !== role.id
+                                      (value) => value !== rol.id
                                     )
                                   );
                             }}
                           />
                         </FormControl>
                         <FormLabel className="font-normal">
-                          {role.label}
+                          {rol.label}
                         </FormLabel>
                       </FormItem>
                     );

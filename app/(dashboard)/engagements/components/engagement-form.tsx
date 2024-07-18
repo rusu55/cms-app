@@ -28,8 +28,7 @@ import { useForm } from "react-hook-form";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
-const formSchema = z.object({
-  id: z.string(),
+const formSchema = z.object({  
   engagementDate: z.date(),
   details: z.string().optional(),
   location: z.string().optional(),
@@ -43,7 +42,7 @@ type Props = {
   onSubmit: (values: FormValues) => void;
   disabled?: boolean;
 };
-const EngagementForm = ({ id, onSubmit, disabled }: Props) => {
+const EngagementForm = ({ onSubmit, disabled, defaultValues, id }: Props) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
@@ -107,6 +106,7 @@ const EngagementForm = ({ id, onSubmit, disabled }: Props) => {
               <FormLabel>Engagement Location</FormLabel>
               <FormControl>
                 <Input
+                  defaultValue={defaultValues?.location}
                   disabled={disabled}
                   placeholder="e.g. Dany Boe"
                   {...field}
