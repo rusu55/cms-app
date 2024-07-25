@@ -22,7 +22,7 @@ const ProjectsPage = ({ params }: { params: { year: string } }) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <DataTable columns={columns} data={weddings} filterKey="brideName"/>
+          <DataTable columns={columns} data={weddings} filterKey="weddingDate"/>
         </CardContent>
       </Card>
     </div>

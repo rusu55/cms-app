@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["omitApi"]
 }
 
 datasource db {
@@ -37,15 +38,15 @@ model Wedding {
   clientId      String      @unique @db.ObjectId
   client        Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
   weddingDate   DateTime
-  mainPhotoId   String?     @unique @db.ObjectId
+  mainPhotoId   String?     @db.ObjectId
   mainPhoto     Contractor? @relation("MainPhoto", fields: [mainPhotoId], references: [id])
-  secondPhotoId String?     @unique @db.ObjectId
+  secondPhotoId String?     @db.ObjectId
   secondPhoto   Contractor? @relation("SecondPhoto", fields: [secondPhotoId], references: [id])
-  mainVideoId   String?     @unique @db.ObjectId
+  mainVideoId   String?     @db.ObjectId
   mainVideo     Contractor? @relation("MainVideo", fields: [mainVideoId], references: [id])
-  secondVideoId String?     @unique @db.ObjectId
+  secondVideoId String?     @db.ObjectId
   secondVideo   Contractor? @relation("SecondVideo", fields: [secondVideoId], references: [id])
-  photoboothId  String?     @unique @db.ObjectId
+  photoboothId  String?      @db.ObjectId
   photobooth    Contractor? @relation("PhotoBooth", fields: [photoboothId], references: [id])
 }
 
@@ -57,7 +58,7 @@ model Engagement {
   engagementCreated DateTime    @default(now())
   clientId          String      @unique @db.ObjectId
   client            Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
-  engagementId      String?     @unique @db.ObjectId
+  engagementId      String?     @db.ObjectId
   engagementBy      Contractor? @relation("Engagement", fields: [engagementId], references: [id], onDelete: Cascade)
 }
 
@@ -69,9 +70,9 @@ model Project {
   videoEditDoneDate DateTime?
   clientId          String      @unique @db.ObjectId
   client            Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
-  photoEditId       String?     @unique @db.ObjectId
+  photoEditId       String?     @db.ObjectId
   photoEdit         Contractor? @relation("PhotoEdit", fields: [photoEditId], references: [id], onDelete: Cascade)
-  videoEditId       String?     @unique @db.ObjectId
+  videoEditId       String?     @db.ObjectId
   videoEdit         Contractor? @relation("VideoEdit", fields: [videoEditId], references: [id], onDelete: Cascade)
 }
 
@@ -83,14 +84,14 @@ model Contractor {
   role          String[]
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
-  photoEditBy   Project?    @relation("PhotoEdit")
-  videoEditBy   Project?    @relation("VideoEdit")
-  mainPhotoBy   Wedding?    @relation("MainPhoto")
-  secondPhotoBy Wedding?    @relation("SecondPhoto")
-  mainVideoBy   Wedding?    @relation("MainVideo")
-  secondVideoBy Wedding?    @relation("SecondVideo")
-  photoboothBy  Wedding?    @relation("PhotoBooth")
-  engagementBy  Engagement? @relation("Engagement")
+  photoEditBy   Project[]    @relation("PhotoEdit")
+  videoEditBy   Project[]    @relation("VideoEdit")
+  mainPhotoBy   Wedding[]    @relation("MainPhoto")
+  secondPhotoBy Wedding[]    @relation("SecondPhoto")
+  mainVideoBy   Wedding[]    @relation("MainVideo")
+  secondVideoBy Wedding[]    @relation("SecondVideo")
+  photoboothBy  Wedding[]   @relation("PhotoBooth")
+  engagementBy  Engagement[] @relation("Engagement")
 }
 
 model Video {

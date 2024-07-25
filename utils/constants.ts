@@ -1,14 +1,19 @@
-export const services = [{id: 'Photography', label: 'Photography'}, 
-                        {id: 'Second Photograpger', label: 'Second Photographer'},
-                         {id: 'Cinematography', label: 'Cinematography'}, 
-                         {id: 'Second Cinematographer', label: 'Second Cinematographer'},
-                         {id: 'Engagement', label: 'Engagement'},
-                         {id: 'Drone', label: 'Drone'},
-                         {id: 'Photobooth', label: 'Photobooth'},
-                         {id: 'Wedding Album', label: 'Wedding Album'},
-                         {id: 'Parents Album', label: 'Parents Album'} ]
+export const services = [{id: 'mainPhoto', label: 'Photography'}, 
+                        {id: 'secondPhoto', label: 'Second Photographer'},
+                         {id: 'mainVideo', label: 'Cinematography'}, 
+                         {id: 'secondVideo', label: 'Second Cinematographer'},
+                         {id: 'engagement', label: 'Engagement'},
+                         {id: 'drone', label: 'Drone'},
+                         {id: 'photobooth', label: 'Photobooth'},
+                         {id: 'weddingAlbum', label: 'Wedding Album'},
+                         {id: 'parentsAlbum', label: 'Parents Album'} ]
 export const roles = [
-    {id: 'Photographer', label: 'Photographer'},
-    {id: 'Videographer', label: 'Videographer'},
-    {id: 'Editor', label: 'Editor'},
+    {id: 'photographer', label: 'Photographer'},
+    {id: 'videographer', label: 'Videographer'},
+    {id: 'editor', label: 'Editor'},
+    {id: 'photobooth', label: 'Photobooth'},
+]
+
+export const jobs = [
+    
 ]

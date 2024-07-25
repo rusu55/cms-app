@@ -66,12 +66,11 @@ export const POST = async (request: NextRequest) =>{
     
     let fields: any = {clientId: newClient.id}
     fields['weddingDate'] = response.data.weddingDate;
-    if(newClient.services.includes("Photography")) fields['mainPhotoId'] = null;
-    if(newClient.services.includes("Second Photograpger")) fields['secondPhotoId'] = null;
-    if(newClient.services.includes("Cinematography")) fields['mainVideoId'] = null;
-    if(newClient.services.includes("Second Cinematographer")) fields['secondVideoId'] = null;
-    if(newClient.services.includes("Second Cinematographer")) fields['secondVideoId'] = null;
-    if(newClient.services.includes("Photobooth")) fields['photoboothId'] = null;
+    if(newClient.services.includes("mainPhoto")) fields['mainPhotoId'] = null;
+    if(newClient.services.includes("secondPhoto")) fields['secondPhotoId'] = null;
+    if(newClient.services.includes("mainVideo")) fields['mainVideoId'] = null;
+    if(newClient.services.includes("secondVideo")) fields['secondVideoId'] = null;
+    if(newClient.services.includes("photobooth")) fields['photoboothId'] = null;
     
     const newWedding = await prisma.wedding.create({
             data: fields

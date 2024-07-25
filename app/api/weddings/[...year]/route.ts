@@ -19,14 +19,20 @@ export const GET =  async (req: NextRequest, {params} : {params: {year: string}}
                 }
             ],
             include: {
-                client: true
-            }
+                client: true,
+                mainPhoto: true,
+                mainVideo: true,
+                secondPhoto: true,
+                secondVideo: true,
+                photobooth: true,
+            },
+           
         })
 
         if(!weddings){
             return NextResponse.json("Weddings not found", {status: 401})
         }
-
+       
         return NextResponse.json(weddings, {status: 201})
     }catch(error){
         return NextResponse.json("Internal Erroor", {status: 500})

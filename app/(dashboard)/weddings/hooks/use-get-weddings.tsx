@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const useGetWeddings = (year: string) => {
     const query = useQuery({
-        queryKey: ['weddings', year],
+        queryKey: ['weddings'],
         queryFn: async () =>{
             const response = await axios.get(`/api/weddings/${year}`)
 

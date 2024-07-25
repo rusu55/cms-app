@@ -34,7 +34,7 @@ export const EditingAction: React.FC<any> = ({ data: { id } }) => {
 
   if (contractorsQuerry.data) {
     contractors = contractorsQuerry.data.filter(
-      (value: any) => value.role[value.role.length - 1] === "Editor"
+      (value: any) => value.role.includes("editor")
     );
   }
 
