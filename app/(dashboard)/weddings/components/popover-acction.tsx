@@ -1,4 +1,5 @@
-
+'use client';
+import dynamic from "next/dynamic";
 import {useState} from 'react';
 import { Separator } from "@/components/ui/separator";
 import {
@@ -9,24 +10,37 @@ import {
   import { Button } from "@/components/ui/button";
   import { AlertModal } from "@/components/modals/alert-modal";
   import { formatServices } from '@/utils/formatServices';
+  import { useCreateNote } from "../hooks/use-create-note";
 
-  import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
+const WeddingDetailsForm = dynamic(
+  () => import("@/app/(dashboard)/weddings/components/wedding-details-form"),
+  {
+    ssr: false,
+  }
+);
 
 export const PopoverAction = ({data}: any) => {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-    const services = formatServices(data.services);
+    const services = formatServices(data.client.services);
+    const mutation = useCreateNote(data.id);
 
     //Modal Body
-
+    const onSubmit  = async (values: any) =>{
+        console.log(data.id)
+        mutation.mutate(values, {
+          onSuccess: () => {
+            setOpen(false);
+          }
+        })
+    }
     const body = (
       <div>
           <div className='flex'>
              <div>Package: Value</div>
              <div>{data.packagePrice}</div>                                  
         </div>
-        <SimpleMDE placeholder='Description'/>      
+            <WeddingDetailsForm onSubmit={onSubmit} disabled={mutation.isPending} />
       </div>
        
     )
@@ -42,17 +56,23 @@ export const PopoverAction = ({data}: any) => {
         />
          <HoverCard>
             <HoverCardTrigger asChild>
-                <Button variant="link">{data.brideName}</Button>
+                <Button variant="link">{data.client.brideName}</Button>
             </HoverCardTrigger>
             <HoverCardContent className="w-80">
                   <div>
-                    <div>Contract Value: ${data.packagePrice}</div>
+                    <div>Contract Value: ${data.client.packagePrice}</div>
                     <Separator className="my-1" />
                     <p>Package Includes:</p>
                     <div className='grid grid-cols-2'>
                        {services.map((service: string, index: number) =>(
                         <div key={index}>{service}</div>
                        ))}
+                    </div>
+                    <Separator className="my-1" />
+                    <div>
+                      {data.notes.map((note, index) =>(
+                        <p key={index}>{note.note}</p>
+                      ))}
                     </div>
                     <Button onClick={()=>setOpen(true)}>Add Details</Button>
                   </div>

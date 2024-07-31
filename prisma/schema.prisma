@@ -48,6 +48,8 @@ model Wedding {
   secondVideo   Contractor? @relation("SecondVideo", fields: [secondVideoId], references: [id])
   photoboothId  String?      @db.ObjectId
   photobooth    Contractor? @relation("PhotoBooth", fields: [photoboothId], references: [id])
+  notes WeddingNote[]
+  payments ContractorPayment[]
 }
 
 model Engagement {
@@ -92,6 +94,8 @@ model Contractor {
   secondVideoBy Wedding[]    @relation("SecondVideo")
   photoboothBy  Wedding[]   @relation("PhotoBooth")
   engagementBy  Engagement[] @relation("Engagement")
+  paymentRate String[]
+  payments ContractorPayment[]
 }
 
 model Video {
@@ -110,6 +114,23 @@ model Video {
   zipCode       String
   clientId      String   @unique @db.ObjectId
   client        Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+model WeddingNote {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  weddingId String @db.ObjectId
+  wedding Wedding @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  note String
+  createAt DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model ContractorPayment {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  weddingId String @db.ObjectId
+  wedding Wedding @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  contractorId String @db.ObjectId
+  contractor Contractor @relation(fields: [contractorId], references: [id], onDelete: Cascade)
 }
 
 enum Status {

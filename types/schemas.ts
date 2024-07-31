@@ -22,3 +22,7 @@ export const clientSchema = z.object({
   }),
   packagePrice: z.string(),
 });
+
+export const weddingDetailsSchema = z.object({
+  details: z.string().optional()
+})

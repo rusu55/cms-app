@@ -28,7 +28,7 @@ export const columns: ColumnDef<any>[] = [
     cell: ({row}) =>{
       return(
        <div>
-          <PopoverAction data={row.original.client}/>
+          <PopoverAction data={row.original}/>
        </div>
       )
     }

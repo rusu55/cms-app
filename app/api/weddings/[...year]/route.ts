@@ -25,6 +25,7 @@ export const GET =  async (req: NextRequest, {params} : {params: {year: string}}
                 secondPhoto: true,
                 secondVideo: true,
                 photobooth: true,
+                notes: true,
             },
            
         })
