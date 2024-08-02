@@ -16,7 +16,7 @@ import { ContractorForm } from "./contractor-form";
 export const NewContractorSheet = () => {
   const { isOpen, onClose } = useNewContractor();
   const mutation = useCreateContractor();
-
+  
   const onSubmit = async (values: any) => {
     console.log({ values });
     mutation.mutate(values, {
@@ -25,6 +25,9 @@ export const NewContractorSheet = () => {
       },
     });
   };
+  const defaultValues = {
+    name: "", email: "", phone: "", role: []
+  }
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
@@ -33,7 +36,7 @@ export const NewContractorSheet = () => {
           <SheetTitle>New Account</SheetTitle>
           <SheetDescription>Create ne Account...</SheetDescription>
         </SheetHeader>
-        <ContractorForm onSubmit={onSubmit} disabled={false} />
+        <ContractorForm onSubmit={onSubmit} disabled={false} defaultValues={defaultValues} />
       </SheetContent>
     </Sheet>
   );

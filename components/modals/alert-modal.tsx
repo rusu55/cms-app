@@ -1,5 +1,5 @@
 "use client";
-
+import { ReactNode } from "react";
 import { useEffect, useState } from "react";
 
 import { Modal } from "@/components/ui/modal";
@@ -10,6 +10,7 @@ interface AlertModalProps {
   onClose: () => void;
   onConfirm: () => void;
   loading: boolean;
+  body?: ReactNode
 }
 
 export const AlertModal: React.FC<AlertModalProps> = ({
@@ -17,6 +18,7 @@ export const AlertModal: React.FC<AlertModalProps> = ({
   onClose,
   onConfirm,
   loading,
+  body
 }) => {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -35,7 +37,15 @@ export const AlertModal: React.FC<AlertModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
     >
-      <div className="pt-6 space-x-2 flex items-center justify-end w-full">
+      {body ? (
+        <>
+          <div>{body}</div>
+          <div className="pt-4">
+            <Button className="w-full" variant="outline" onClick={onClose}>Cancel</Button>
+          </div>
+        </>             
+      ): (
+        <div className="pt-6 space-x-2 flex items-center justify-end w-full">        
         <Button disabled={loading} variant="outline" onClick={onClose}>
           Cancel
         </Button>
@@ -43,6 +53,7 @@ export const AlertModal: React.FC<AlertModalProps> = ({
           Continue
         </Button>
       </div>
+      )} 
     </Modal>
   );
 };

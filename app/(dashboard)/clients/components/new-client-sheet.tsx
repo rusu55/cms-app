@@ -38,8 +38,8 @@ export const NewClientSheet = () => {
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent className="space-y-4">
         <SheetHeader>
-          <SheetTitle>New Account</SheetTitle>
-          <SheetDescription>Create ne Account...</SheetDescription>
+          <SheetTitle>New Client</SheetTitle>
+          <SheetDescription>Create new Client...</SheetDescription>
         </SheetHeader>
         <ClientForm onSubmit={onSubmit} disabled={mutation.isPending}  />
       </SheetContent>

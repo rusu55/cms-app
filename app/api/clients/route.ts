@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-
 import {z} from 'zod'
-
 import prisma from "@/prisma/prisma";
+import { clientSchema } from "@/types/schemas";
 
 export const GET = async () => {
     const response = await prisma.client.findMany({})
@@ -19,6 +18,7 @@ export const POST = async (request: NextRequest) =>{
         secondaryEmail: z.string().email().optional(),
         phone: z.string().optional(),
         weddingDate: z.string(),
+        weddingLocation: z.string().optional(),
         services: z.array(z.string()).refine((value) => value.some((item) => item), {
           message: "You have to select at least one item.",
         }),
@@ -51,6 +51,7 @@ export const POST = async (request: NextRequest) =>{
             secondaryEmail: response.data?.secondaryEmail,
             phone: response.data?.phone,
             weddingDate: response.data.weddingDate,
+            weddingLocation: response.data?.weddingLocation,
             services: response.data.services,
             packagePrice: response.data.packagePrice
         }
@@ -65,12 +66,11 @@ export const POST = async (request: NextRequest) =>{
    
     let fields: any = {clientId: newClient.id}
     fields['weddingDate'] = response.data.weddingDate;
-    if(newClient.services.includes("Photography")) fields['mainPhotoId'] = null;
-    if(newClient.services.includes("Second Photograpger")) fields['secondPhotoId'] = null;
-    if(newClient.services.includes("Cinematography")) fields['mainVideoId'] = null;
-    if(newClient.services.includes("Second Cinematographer")) fields['secondVideoId'] = null;
-    if(newClient.services.includes("Second Cinematographer")) fields['secondVideoId'] = null;
-    if(newClient.services.includes("Photobooth")) fields['photoboothId'] = null;
+    if(newClient.services.includes("mainPhoto")) fields['mainPhotoId'] = null;
+    if(newClient.services.includes("secondPhoto")) fields['secondPhotoId'] = null;
+    if(newClient.services.includes("mainVideo")) fields['mainVideoId'] = null;
+    if(newClient.services.includes("secondVideo")) fields['secondVideoId'] = null;
+    if(newClient.services.includes("photobooth")) fields['photoboothId'] = null;
     
     const newWedding = await prisma.wedding.create({
             data: fields

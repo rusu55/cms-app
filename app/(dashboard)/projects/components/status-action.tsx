@@ -23,6 +23,7 @@ type CellActionProps = {
 export const StatusAction: React.FC<any> = ({ data: {id} }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState({});
   
 
   const onConfirm = async () => {    
@@ -49,7 +50,10 @@ export const StatusAction: React.FC<any> = ({ data: {id} }) => {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <Separator className="my-1" />
           <DropdownMenuLabel>Project Updates</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
+          <DropdownMenuItem onClick={() => {
+                      setOpen(true)
+                      setInfo({status:'backup', action: 'setStatus'})
+                      }}>
             <Trash className="mr-2 h-4 w-4" /> Set ast Backup
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>

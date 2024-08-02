@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash, BookImage } from "lucide-react";
 import { AlertModal } from "@/components/modals/alert-modal";
 
+import { useOpenContractor } from "../hooks/use-open-contractor";
+
 import { Separator } from "@/components/ui/separator";
 type Props = {
   id: string;
@@ -25,6 +27,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data: { id } }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState("");
+
+  const {onOpen} = useOpenContractor();
+  
 
   const onConfirm = async () => {
     if (type === "viewJobs") console.log("Jobsssssssssssssssssssss");
@@ -49,8 +54,8 @@ export const CellAction: React.FC<CellActionProps> = ({ data: { id } }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Edit Contractor
+          <DropdownMenuItem onClick={() => onOpen(id)}>
+            <Edit className="mr-2 h-4 w-4" /> Edit Contractor
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4" /> Delete Contractor

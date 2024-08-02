@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 
-export const useSetEditProject = () => {
+export const useSetStatusProject = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -11,7 +11,7 @@ export const useSetEditProject = () => {
       const response = await axios.patch("/api/projects", {
         id: id,
         action: info.action,
-        contractorId: info.contractorId,
+        status: info.status
       });
       
       if (response.status != 201) {
@@ -21,7 +21,7 @@ export const useSetEditProject = () => {
       return data;
     },
     onSuccess: () => {
-      toast({ title: "Success", description: "Job was assigned!" });
+      toast({ title: "Success", description: "Status Updated!" });
       queryClient.invalidateQueries({ queryKey: ["projects"] });
     },
     onError: (error: any) => {

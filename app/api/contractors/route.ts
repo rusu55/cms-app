@@ -29,7 +29,7 @@ export const POST = async (request: NextRequest) =>{
         name: z.string(),
         email: z.string().email().optional(),
         phone: z.string().optional(), 
-        roles: z.array(z.string()).refine((value) => value.some((item) => item), {
+        role: z.array(z.string()).refine((value) => value.some((item) => item), {
             message: "You have to select at least one item.",
           }),     
     })
@@ -58,7 +58,7 @@ export const POST = async (request: NextRequest) =>{
             name: response.data.name,
             email: response.data.email,
             phone: response.data?.phone,
-            role: response.data.roles
+            role: response.data.role
         }
     })
 

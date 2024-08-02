@@ -29,21 +29,11 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
 import { services } from "@/utils/constants";
+import { clientSchema } from "@/types/schemas";
 
-const formSchema = z.object({
-  brideName: z.string().min(2).max(50),
-  groomName: z.string().min(2).max(50),
-  email: z.string().email(),
-  secondaryEmail: z.string().email().optional(),
-  phone: z.string().optional(),
-  weddingDate: z.date(),
-  services: z.array(z.string()).refine((value) => value.some((item) => item), {
-    message: "You have to select at least one item.",
-  }),
-  packagePrice: z.string(),
-});
 
-type FormValues = z.input<typeof formSchema>;
+
+type FormValues = z.input<typeof clientSchema>;
 
 type Props = {
   id?: string;
@@ -53,12 +43,13 @@ type Props = {
 };
 const ClientForm = ({ id, onSubmit, disabled }: Props) => {
   const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(clientSchema),
     defaultValues: { services: [] },
   });
 
   const handleSubmit = (values: FormValues) => {
     onSubmit(values);
+    
   };
 
   return (
@@ -235,23 +226,40 @@ const ClientForm = ({ id, onSubmit, disabled }: Props) => {
             </FormItem>
           )}
         />
-        <FormField
-          name="packagePrice"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Package Price</FormLabel>
-              <FormControl>
-                <Input
-                  disabled={disabled}
-                  placeholder="e.g. Dany Boe"
-                  {...field}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-
+        <div className="w-full flex justify-center space-x-2">
+              <FormField
+                    name="weddingLocation"
+                    control={form.control}
+                    render={({ field }) => (
+                      <FormItem className="w-full">
+                        <FormLabel>Wedding Venue</FormLabel>
+                        <FormControl>
+                          <Input
+                            disabled={disabled}
+                            placeholder="e.g. Dany Boe"
+                            {...field}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+            <FormField
+              name="packagePrice"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Package Price</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={disabled}
+                      placeholder="e.g. Dany Boe"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+        </div>       
         <Button className="w-full" disabled={disabled}>
           {id ? "Save Changes" : "Add New Client"}
         </Button>
