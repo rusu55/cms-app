@@ -55,14 +55,14 @@ export const POST = async (request: NextRequest) =>{
             packagePrice: response.data.packagePrice
         }
     })
-
+    
     const newProject = await prisma.project.create({
         data: {
-            clientId: newClient.id,
+            clientId: newClient.id.toString(),
             projectDate: response.data.weddingDate,
         }
     })
-    
+   
     let fields: any = {clientId: newClient.id}
     fields['weddingDate'] = response.data.weddingDate;
     if(newClient.services.includes("Photography")) fields['mainPhotoId'] = null;
